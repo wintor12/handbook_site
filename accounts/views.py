@@ -2,21 +2,37 @@
 Views
 """
 from django.shortcuts import render
-# from django.http import HttpResponse
+from .models import Project, Pro
 
 
 def home(request):
     """
     home
     """
-    return render(request, 'accounts/dashboard.html')
+    # pylint: disable=no-member
+    projects = Project.objects.all()
+    pros = Pro.objects.all()
+
+    # total_pros = pros.count()
+
+    total_projects = projects.count()
+    completed = projects.filter(status='Completed').count()
+    pending = projects.filter(status='Pending').count()
+
+    context = {'projects': projects, 'pros': pros,
+               'total_projects': total_projects, 'completed': completed,
+               'pending': pending}
+
+    return render(request, 'accounts/dashboard.html', context)
 
 
 def project(request):
     """
     project
     """
-    return render(request, 'accounts/projects.html')
+    # pylint: disable=no-member
+    projects = Project.objects.all()
+    return render(request, 'accounts/projects.html', {'projects': projects})
 
 
 def pro(request):
