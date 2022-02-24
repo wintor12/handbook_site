@@ -14,12 +14,13 @@
 			<a class="btn btn-primary  btn-sm btn-block" href="">Add Pro</a>
 			<table class="table table-sm">
 				<tr>
+					<th></th>
 					<th>Pro</th>
 					<th>Project</th>
 				</tr>
 				{% for pro in pros %}
 					<tr>
-
+						<td><a class="btn btn-sm btn-info" href="{% url 'pro' pro.id %}">View</a></td>
 						<td>{{pro.name}}</td>
 						<td>{{pro.phone}}</td>
 					</tr>
@@ -47,8 +48,8 @@
 						<td>{{project.name}}</td>
 						<td>{{project.date_created}}</td>
 						<td>{{project.status}}</td>
-						<td><a href="">Update</a></td>
-						<td><a href="">Delete</a></td>
+						<td><a class="btn btn-sm btn-info" href="">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="">Delete</a></td>
 
 					</tr>
 				{% endfor %}

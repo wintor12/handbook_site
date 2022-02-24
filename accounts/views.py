@@ -35,8 +35,20 @@ def project(request):
     return render(request, 'accounts/projects.html', {'projects': projects})
 
 
-def pro(request):
+def pro(request, pro_id):
     """
     pro
     """
-    return render(request, 'accounts/pro.html')
+    # pylint: disable=no-member
+    pro_item = Pro.objects.get(id=pro_id)
+
+    projects = pro_item.project_set.all()
+    # for project in projects:
+    #     print("=====", project.name)
+    #     print("=====", project.category.all())
+    #     for x in project.category.all():
+    #         print(x.name)
+    project_count = projects.count()
+
+    context = {'pro': pro_item, 'projects': projects, 'project_count': project_count}
+    return render(request, 'accounts/pro.html', context)

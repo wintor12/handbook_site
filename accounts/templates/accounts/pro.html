@@ -19,8 +19,9 @@
 		<div class="card card-body">
 			<h5>Contact Information</h5>
 			<hr>
-			<p>Email: </p>
-			<p>Phone: </p>
+			<p>Name: {{pro.name}}</p>
+			<p>Email: {{pro.email}}</p>
+			<p>Phone: {{pro.phone}}</p>
 		</div>
 	</div>
 
@@ -60,6 +61,26 @@
 					<th>Update</th>
 					<th>Remove</th>
 				</tr>
+
+				{% for project in projects %}
+
+				<tr>
+					<td>{{project.name}}</td>
+					<td>
+						{% for c in project.category.all %}
+							{% if not forloop.last %}
+								{{c.name}},
+							{% else %}
+								{{c.name}}
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td>{{project.date_created}}</td>
+					<td>{{order.status}}</td>
+					<td><a class="btn btn-sm btn-info" href="">Update</a></td>
+					<td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
+				</tr>
+				{% endfor %}
 
 			</table>
 		</div>
